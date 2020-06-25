@@ -1,6 +1,6 @@
-
 var pokemons 
 var poke_imagens = {}
+
 
 //Search
 document.addEventListener('DOMContentLoaded', function() {        //EventListener vai esperar o codigo aparecer para executar o (DOM..)
@@ -20,23 +20,8 @@ document.addEventListener('DOMContentLoaded', function() {        //EventListene
 		var instances = M.Autocomplete.init(elems, { data: poke_imagens });
   })
 
-  //Funcao para Botao de busca
+  
   function selecionarPokemon() {
-    var input = document.querySelector('#autocomplete-input')
-    axios.get(`https://pokeapi.co/api/v2/pokemon/${input.value}/`)
-      .then(response => {
-
-        document.querySelector('#nomePokemon').innerHTML = response.data.name.toUpperCase()
-
-        document.querySelector('#imagemPrincipalPokemon').src = response.data.sprites.front_default
-
-        var lista = document.querySelector('#listaHabilidades')
-        var habilidades = response.data.abilities.map(ab => `<p>${ab.ability.name}</p>`)
-        lista.innerHTML = habilidades.join('')                
-      }) 
-    }
-
-  function selecionarPokemon_2() {
 
     var input = document.querySelector('#autocomplete-input')
 
@@ -50,17 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {        //EventListene
 
       //Imagem principal do pokemon
       document.querySelector('#imagemPrincipalPokemon').src = response.data.sprites.front_default
-
-      //Imagens carrosel
-      // document.querySelector('#imagemCarouselUm').src = response.data.sprites.back_default
-      // document.querySelector('#imagemCarouselDois').src = response.data.sprites.back_shiny
-      // document.querySelector('#imagemCarouselTres').src = response.data.sprites.front_shiny
-      // document.querySelector('#imagemCarouselQuatro').src = response.data.sprites.front_female
-      // document.querySelector('#imagemCarouselCinco').src = response.data.sprites.back_female
-      // document.querySelector('#imagemCarouselSeis').src = response.data.sprites.back_shiny_female
-      // document.querySelector('#imagemCarouselSete').src = response.data.sprites.front_shiny_female
-
-
+      
       //Lista de habilidades do pokemon
       document.getElementById('listaHabilidades').innerHTML = ""
       // <p><span class="profile-real-name">Eletric:</span> Choque que paralisa o adversário</p>
@@ -83,28 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {        //EventListene
           })
           
       })
-      
-
-      // response.data.types.forEach(item => {
-
-      //     //Chamada API endpoit Tipos
-      //     tipos(item.type.url).then( (result_tipo) => {            
-
-      //         var relacao_danos = {
-      //             nome        : item.type.name,
-      //             causa_danos : result_tipo
-      //         }
-
-      //         // Função para salvar os Tipos
-      //         // salvaTipo(relacao_danos)
-
-      //     }).catch( (error) => {
-      //         var end_point = item.type.url
-      //         console.log("Erro no endpoint: " + end_point + "\n")
-      //         console.log(error)
-      //     })
-      // })    
-
+           
     }).catch( (error) => {
         var end_point = "https://pokeapi.co/api/v2/pokemon/" + input.value
         console.log("Erro no endpoint: " + end_point + "\n")
@@ -113,13 +67,9 @@ document.addEventListener('DOMContentLoaded', function() {        //EventListene
 
     //Tratamento para deixar o pesquisar vazio novamente
     input.value = ""
+
+    document.getElementById("tela_pokemons").hidden = false  //mostra tela de pokemon 
+    document.getElementById("tela_inicial").hidden = true    // esconde tela inicial
   }
 
-
-
  
-//Carousel
-document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.carousel');
-    var instances = M.Carousel.init(elems, {'fullWidth':true, 'indicators':true, 'padding':5});
-})
