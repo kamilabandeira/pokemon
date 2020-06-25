@@ -5,7 +5,7 @@ var poke_imagens = {}
 //Search
 document.addEventListener('DOMContentLoaded', function() {        //EventListener vai esperar o codigo aparecer para executar o (DOM..)
   
-  axios.get("https://pokeapi.co/api/v2/pokemon?limit=251")
+  axios.get("https://pokeapi.co/api/v2/pokemon?limit=1000")
 		.then(response => {       
       var pokemons = response.data.results
       pokemons.forEach(poke => {
