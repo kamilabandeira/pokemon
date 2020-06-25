@@ -264,5 +264,30 @@
                 </div>            
             </main>
         </div>
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-app.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-analytics.js"></script>
+
+        <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyA86g5cYmFPsr5JIr0gE6N8coaTgvUWeew",
+            authDomain: "pokemon-bdb9e.firebaseapp.com",
+            databaseURL: "https://pokemon-bdb9e.firebaseio.com",
+            projectId: "pokemon-bdb9e",
+            storageBucket: "pokemon-bdb9e.appspot.com",
+            messagingSenderId: "590424274786",
+            appId: "1:590424274786:web:974b49ac97e5226885de3b",
+            measurementId: "G-T2DQXLRLMZ"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+        </script>
+
     </body>
 </html>
