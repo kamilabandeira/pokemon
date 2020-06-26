@@ -1,6 +1,6 @@
 var pokemons 
 var poke_imagens = {}
- 
+  
 
 //Search
 document.addEventListener('DOMContentLoaded', function() {        //EventListener vai esperar o codigo aparecer para executar o (DOM..)
