@@ -2,7 +2,7 @@ var pokemons
 var poke_imagens = {}
 
 
-//Search
+//Search pesquisar pokemon
 document.addEventListener('DOMContentLoaded', function() {        //EventListener vai esperar o codigo aparecer para executar o (DOM..)
   
   axios.get("https://pokeapi.co/api/v2/pokemon?limit=700")
@@ -20,11 +20,12 @@ document.addEventListener('DOMContentLoaded', function() {        //EventListene
 		var instances = M.Autocomplete.init(elems, { data: poke_imagens });
   })
 
-  
+  //Ao clicar em um pokemon
   function selecionarPokemon() {
 
     var input = document.querySelector('#autocomplete-input')
 
+    //Tratanebto de erro para quando o campo pesquisar estiver vasio
     if (input.length == 0) {
       return false
     } 
@@ -71,11 +72,9 @@ document.addEventListener('DOMContentLoaded', function() {        //EventListene
         console.log(error)
     })
 
-    //Tratamento para deixar o pesquisar vazio novamente
+    //Tratamento de erro para deixar o pesquisar vazio novamente
     input.value = ""
 
     document.getElementById("tela_pokemons").hidden = false  //mostra tela de pokemon 
     document.getElementById("tela_inicial").hidden = true    // esconde tela inicial
   }
-
- 

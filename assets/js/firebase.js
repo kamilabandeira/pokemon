@@ -1,4 +1,4 @@
-// const firebase = require("firebase");
+// const firebase = require("firebase")
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -12,24 +12,27 @@ var firebaseConfig = {
     measurementId: "G-0GFBN2V8PY"
 };
   
-  // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig)
+
 
 //Salva pokemon na collection favoritos
 async function salvaFavorito() {
   var pokemon = document.getElementById("nomePokemonEscondido").value  
 
-  await firebase.database().ref("favoritos").push({nome_pokemon: pokemon}).then( (resulte) => {
-    console.log("Sucesso: " + resulte)
+  await firebase.database().ref("favoritos").push({nome_pokemon: pokemon}).then( (result) => {
+    console.log("Sucesso: " + result)
 
   }).catch((error) => {
-    console.log("Error: " + error)
+    console.log("Error ao salvar favorito: ")
+    console.log(error)
 
   })
 
   //Controle para esconder o botao follow
   verificaFavorito()
 }
+
 
 //Remove pokemon do collectio de favorito 
 async function removeFavorito() {
@@ -50,22 +53,23 @@ async function removeFavorito() {
           console.log("Removido com sucesso ")
 
         }).catch( (error) => {
-
           console.log("Error ao remover favorito: ")
           console.log(error)
+
         })   
       }      
     }) 
-
+    
   }).catch( (error) => {
-
     console.log("Erro ao consultar favoritos para remover")
     console.log(error)
+
   })
 
   //Controle para esconder o botao follow
   verificaFavorito()
 }
+
 
 //Funcao assincrona, pois a consulta de dados no firebase (once) e assincrona, assim e possivel utilizar o comando "await" para guardar o retorno da consulta
 async function verificaFavorito() {
@@ -75,19 +79,18 @@ async function verificaFavorito() {
   await firebase.database().ref("favoritos").once("value").then( (snapshot) => {
 
     snapshot.forEach(item => {
-      var dados = item.val()      
-      console.log("Dados: " + dados.nome_pokemon)
-
+      var dados = item.val()  
+      
+      //Pokemon EXISTE na collection favoritos
       if(dados.nome_pokemon == pokemon) {
-        //Pokemon EXISTE na collection favoritos
          achou = true
       }      
-    }) 
+    })
 
   }).catch( (error) => {
-
     console.log("Erro ao consultar favoritos")
     console.log(error)
+
   })
 
   //Logica para controlar a visualizacao do botao "follow" e "unfollow"
