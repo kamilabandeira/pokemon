@@ -1,6 +1,6 @@
 var pokemons 
 var poke_imagens = {}
-   
+
 
 //Search
 document.addEventListener('DOMContentLoaded', function() {        //EventListener vai esperar o codigo aparecer para executar o (DOM..)
@@ -32,7 +32,10 @@ document.addEventListener('DOMContentLoaded', function() {        //EventListene
     axios.get("https://pokeapi.co/api/v2/pokemon/" + input.value).then( (response) => {
       //Nome do pokemon
       document.querySelector('#nomePokemon').innerHTML = "_" + response.data.name.toLowerCase() 
-      document.querySelector('#nomePokemonEscondido').value = response.data.name.toLowerCase() 
+      document.querySelector('#nomePokemonEscondido').value = response.data.name.toLowerCase()
+      //Função para comtrolar o botão follow 
+      verificaFavorito()
+  
 
       //Imagem principal do pokemon
       var id_pokemon = response.data.id.toString()

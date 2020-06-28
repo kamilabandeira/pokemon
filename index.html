@@ -80,12 +80,12 @@
                         <div class="profile-user-settings">
                             <h1 class="profile-user-name" id="nomePokemon">_InstaPoke</h1>  
                             <input type="text" id="nomePokemonEscondido" hidden="true"></input>
-                            <!-- <button class="profile-edit-btn" style="outline: 0.5rem auto #4d90fe; color: white; background-color: #4d90fe; cursor: pointer;" onclick="salvaFavorito()">Follow</button>                           -->
-                            <!-- <button class="profile-edit-btn" onclick="retiraFavorito()">Unfollow</button>  -->
 
-                            <!-- <button class="profile-settings-btn" style="background-color: #fafafa;"> -->
-                                <!-- <img src="./assets/img/unfollow.PNG" >
-                            </button>                          -->
+                            <button class="profile-edit-btn" onclick="salvaFavorito()" id="btnFollow" style="outline: 0.5rem auto #4d90fe; color: white; background-color: #4d90fe; cursor: pointer;">Follow</button>
+
+                            <button class="profile-settings-btn" onclick="removeFavorito()" id="btnUnFollow" style="background-color: #fafafa; cursor: pointer;">
+                                <img src="./assets/img/unfollow.PNG" >                        
+                            </button>                         
                         </div>
 
                         <div class="profile-stats">

@@ -15,14 +15,90 @@ var firebaseConfig = {
   // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-function salvaFavorito() {
+//Salva pokemon na collection favoritos
+async function salvaFavorito() {
   var pokemon = document.getElementById("nomePokemonEscondido").value  
 
-  firebase.database().ref("favoritos").push({nome_pokemon: pokemon}).then( (resulte) => {
+  await firebase.database().ref("favoritos").push({nome_pokemon: pokemon}).then( (resulte) => {
     console.log("Sucesso: " + resulte)
 
   }).catch((error) => {
     console.log("Error: " + error)
 
-  })   
+  })
+
+  //Controle para esconder o botao follow
+  verificaFavorito()
 }
+
+//Remove pokemon do collectio de favorito 
+async function removeFavorito() {
+  var pokemon = document.getElementById("nomePokemonEscondido").value  
+
+  var favoritos_ref = firebase.database().ref("favoritos")
+
+  await favoritos_ref.once("value").then( (snapshot) => {
+
+    snapshot.forEach(item => {
+      var dados = item.val()
+
+      //Pokemon EXISTE na collection favoritos
+      if(dados.nome_pokemon == pokemon) {
+        var id_remover = item.key
+
+        favoritos_ref.child(id_remover).remove().then( (result) => {
+          console.log("Removido com sucesso ")
+
+        }).catch( (error) => {
+
+          console.log("Error ao remover favorito: ")
+          console.log(error)
+        })   
+      }      
+    }) 
+
+  }).catch( (error) => {
+
+    console.log("Erro ao consultar favoritos para remover")
+    console.log(error)
+  })
+
+  //Controle para esconder o botao follow
+  verificaFavorito()
+}
+
+//Funcao assincrona, pois a consulta de dados no firebase (once) e assincrona, assim e possivel utilizar o comando "await" para guardar o retorno da consulta
+async function verificaFavorito() {
+  var pokemon = document.getElementById("nomePokemonEscondido").value  
+  var achou = false
+  
+  await firebase.database().ref("favoritos").once("value").then( (snapshot) => {
+
+    snapshot.forEach(item => {
+      var dados = item.val()      
+      console.log("Dados: " + dados.nome_pokemon)
+
+      if(dados.nome_pokemon == pokemon) {
+        //Pokemon EXISTE na collection favoritos
+         achou = true
+      }      
+    }) 
+
+  }).catch( (error) => {
+
+    console.log("Erro ao consultar favoritos")
+    console.log(error)
+  })
+
+  //Logica para controlar a visualizacao do botao "follow" e "unfollow"
+  if(achou) {
+    document.getElementById("btnFollow").hidden = true  // esconde
+    document.getElementById("btnUnFollow").hidden = false    // mostra 
+
+  } else {
+    document.getElementById("btnFollow").hidden = false  //mostra  
+    document.getElementById("btnUnFollow").hidden = true    // esconde 
+
+  }  
+}
+
