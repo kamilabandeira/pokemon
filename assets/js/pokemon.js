@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {        //EventListene
 				var numero = split[split.length-2]
 				var url = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + numero + '.png'
 				poke_imagens[poke.name] = url
-    })    
-  })
+     })    
+    })
   
 		var elems = document.querySelectorAll('.autocomplete');		
 		var instances = M.Autocomplete.init(elems, { data: poke_imagens });
@@ -32,9 +32,12 @@ document.addEventListener('DOMContentLoaded', function() {        //EventListene
     axios.get("https://pokeapi.co/api/v2/pokemon/" + input.value).then( (response) => {
       //Nome do pokemon
       document.querySelector('#nomePokemon').innerHTML = "_" + response.data.name.toLowerCase() 
+      document.querySelector('#nomePokemonEscondido').value = response.data.name.toLowerCase() 
 
       //Imagem principal do pokemon
-      document.querySelector('#imagemPrincipalPokemon').src = response.data.sprites.front_default
+      var id_pokemon = response.data.id.toString()
+      document.querySelector('#imagemPrincipalPokemon').src = "https://assets.pokemon.com/assets/cms2/img/pokedex/full/" + id_pokemon.padStart(3, 0) + ".png"
+      // document.querySelector('#imagemPrincipalPokemon').src = response.data.sprites.front_default
       
       //Lista de habilidades do pokemon
       document.getElementById('listaHabilidades').innerHTML = ""

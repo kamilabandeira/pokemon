@@ -118,6 +118,7 @@ img {
 .profile-settings-btn {
     font-size: 2rem;
     margin-left: 1rem;
+    border: 0.1rem solid #dbdbdb;
 }
 
 .profile-stats {

@@ -10,9 +10,11 @@
         <link type="text/css" rel="stylesheet" href="./assets/css/materialize.min.css"  media="screen,projection"/>
 
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase.js"></script>
         <script type="text/javascript" src="./assets/js/materialize.min.js"></script>        
         <script type="text/javascript" src="./assets/js/end_points.js"></script>
         <script type="text/javascript" src="./assets/js/pokemon.js"></script>
+        <script type="text/javascript" src="./assets/js/firebase.js"></script>
     </head>
 
     <body>
@@ -26,7 +28,7 @@
             <div class="input-field col s12">
                 <i class="material-icons prefix"></i>
                 <input type="text" id="autocomplete-input" class="autocomplete" onchange="selecionarPokemon()">
-                <label for="autocomplete-input" style="font-size: 20px;" >Pesquisar Pokemons</label>
+                <label for="autocomplete-input" style="font-size: 20px; " >Pesquisar Pokemons</label>
             </div>
                   
             <div class="icons">
@@ -76,7 +78,14 @@
                         </div>
 
                         <div class="profile-user-settings">
-                            <h1 class="profile-user-name" id="nomePokemon">_InstaPoke</h1>                            
+                            <h1 class="profile-user-name" id="nomePokemon">_InstaPoke</h1>  
+                            <input type="text" id="nomePokemonEscondido" hidden="true"></input>
+                            <!-- <button class="profile-edit-btn" style="outline: 0.5rem auto #4d90fe; color: white; background-color: #4d90fe; cursor: pointer;" onclick="salvaFavorito()">Follow</button>                           -->
+                            <!-- <button class="profile-edit-btn" onclick="retiraFavorito()">Unfollow</button>  -->
+
+                            <!-- <button class="profile-settings-btn" style="background-color: #fafafa;"> -->
+                                <!-- <img src="./assets/img/unfollow.PNG" >
+                            </button>                          -->
                         </div>
 
                         <div class="profile-stats">
@@ -95,7 +104,7 @@
 
                             <br>
                             <p style="font-size: 13px">
-                                <span style="color: gray; ">Followed by</span> ash.milgrau, misty_htinha, brock_zik4, arbytebr, tv.globinho
+                                <span style="color: gray; ">Followed by</span> ash.milgrau, misty_herio, top_brock, arbytebr, tv.globinho
                                 <span style="color: gray; ">and more 1.000 people</span> 
                             </p>                            
                         </div>
@@ -267,31 +276,6 @@
                     </div>              
                 </div>            
             </main>
-        </div>
-
-        <!-- The core Firebase JS SDK is always required and must be listed first -->
-        <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-app.js"></script>
-
-        <!-- TODO: Add SDKs for Firebase products that you want to use
-            https://firebase.google.com/docs/web/setup#available-libraries -->
-        <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-analytics.js"></script>
-
-        <script>
-        // Your web app's Firebase configuration
-        var firebaseConfig = {
-            apiKey: "AIzaSyA86g5cYmFPsr5JIr0gE6N8coaTgvUWeew",
-            authDomain: "pokemon-bdb9e.firebaseapp.com",
-            databaseURL: "https://pokemon-bdb9e.firebaseio.com",
-            projectId: "pokemon-bdb9e",
-            storageBucket: "pokemon-bdb9e.appspot.com",
-            messagingSenderId: "590424274786",
-            appId: "1:590424274786:web:974b49ac97e5226885de3b",
-            measurementId: "G-T2DQXLRLMZ"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        firebase.analytics();
-        </script>
-
+        </div>        
     </body>
 </html>
