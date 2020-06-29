@@ -27,8 +27,9 @@
 
             <div class="input-field col s12">
                 <i class="material-icons prefix"></i>
-                <input type="text" id="autocomplete-input" class="autocomplete" onchange="selecionarPokemon()">
-                <label for="autocomplete-input" style="font-size: 20px; " >Pesquisar Pokemons</label>
+
+                <input type="text" id="autocomplete-input" class="autocomplete" onchange="selecionarPokemon()" hidden="true">
+                <label for="autocomplete-input" id="label-autocomplete-input" style="font-size: 20px;" hidden="true" >Pesquisar Pokemons</label>
             </div>
                   
             <div class="icons">
@@ -46,13 +47,28 @@
                 <div class="gallery" >
 
                     <div class="gallery-item" tabindex="0">
-                        <h1 style="color: black; font-size: 50px; text-align: center; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif">
-                            PREPAREM-SE PARA ENCRENCA...
-                        </h1>
+                        <div style="text-align: center;">
+                            <h1 style="color: black; font-size: 50px; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif">
+                                PREPAREM-SE PARA ENCRENCA...
+                            </h1>
+    
+                            <h1 style="color: black; font-size: 50px; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif">
+                                ENCRENCA EM DOBRO!
+                            </h1>
 
-                        <h1 style="color: black; font-size: 50px; text-align: center; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif">
-                            ENCRENCA EM DOBRO!
-                        </h1>
+                            <div id="tela_entrar">
+                                <label for="login" style="font-size: 20px;">Email: </label>
+                                <input type="email" id="login" style="width: 25%;">
+                                
+                                <label for="senha_login" style="font-size: 20px;">Senha: </label>
+                                <input type="password" id="senha_login" style="width: 25%;">
+
+                                <button class="profile-edit-btn" onclick="login()" id="btnEntrar" style="outline: 0.5rem auto #4d90fe; color: white; background-color: #4d90fe; cursor: pointer;">Entrar</button>
+                                <!-- Criar usuario -->
+                                <button class="profile-edit-btn" onclick="criaUsuario()" id="btnCriar" style="outline: 0.5rem auto #4d90fe; color: #4d90fe; cursor: pointer;">Criar Usuário</button>
+                            </div>
+                        </div>
+                        
 
                         <img src="./assets/img/equipe_roquet.jpeg" class="gallery-image" alt="">
 

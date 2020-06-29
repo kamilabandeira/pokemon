@@ -19,8 +19,9 @@ firebase.initializeApp(firebaseConfig)
 //Salva pokemon na collection favoritos
 async function salvaFavorito() {
   var pokemon = document.getElementById("nomePokemonEscondido").value  
+  var usuario = firebase.auth().currentUser.uid
 
-  await firebase.database().ref("favoritos").push({nome_pokemon: pokemon}).then( (result) => {
+  await firebase.database().ref("favoritos/" + usuario).push({nome_pokemon: pokemon}).then( (result) => {
     console.log("Sucesso: " + result)
 
   }).catch((error) => {
@@ -37,8 +38,9 @@ async function salvaFavorito() {
 //Remove pokemon do collectio de favorito 
 async function removeFavorito() {
   var pokemon = document.getElementById("nomePokemonEscondido").value  
+  var usuario = firebase.auth().currentUser.uid
 
-  var favoritos_ref = firebase.database().ref("favoritos")
+  var favoritos_ref = firebase.database().ref("favoritos/" + usuario)
 
   await favoritos_ref.once("value").then( (snapshot) => {
 
@@ -59,7 +61,7 @@ async function removeFavorito() {
         })   
       }      
     }) 
-    
+
   }).catch( (error) => {
     console.log("Erro ao consultar favoritos para remover")
     console.log(error)
@@ -73,10 +75,11 @@ async function removeFavorito() {
 
 //Funcao assincrona, pois a consulta de dados no firebase (once) e assincrona, assim e possivel utilizar o comando "await" para guardar o retorno da consulta
 async function verificaFavorito() {
-  var pokemon = document.getElementById("nomePokemonEscondido").value  
+  var pokemon = document.getElementById("nomePokemonEscondido").value 
+  var usuario = firebase.auth().currentUser.uid
   var achou = false
   
-  await firebase.database().ref("favoritos").once("value").then( (snapshot) => {
+  await firebase.database().ref("favoritos/" + usuario).once("value").then( (snapshot) => {
 
     snapshot.forEach(item => {
       var dados = item.val()  
@@ -104,4 +107,46 @@ async function verificaFavorito() {
 
   }  
 }
+
+
+//Cria usuario
+function criaUsuario() {
+  var email = document.querySelector("#login").value.toString().trim()
+  var password = document.querySelector("#senha_login").value.toString().trim()
+
+  firebase.auth().createUserWithEmailAndPassword(email, password).then( (user) => {
+    alert("Usuário criado com sucesso. Clique em ENTRAR. ")
+
+  }).catch( (error) => {
+    console.log("Erro ao criar usuario")
+    console.log(error)
+    alert("Erro ao criar usuário: " + error.message)  
+
+  })
+  
+} 
+
+//Login
+function login() {
+  var email = document.querySelector("#login").value.toString().trim()
+  var password = document.querySelector("#senha_login").value.toString().trim()
+
+  firebase.auth().signInWithEmailAndPassword(email, password).then( (user) => {
+    //Esconder tela de login 
+    document.getElementById("tela_entrar").hidden = true 
+
+    //Mostra tela de pesquisa pokemon
+    document.getElementById("autocomplete-input").hidden = false
+    document.getElementById("label-autocomplete-input").hidden = false
+
+    alert("Bem vindo ao InstaPoke.")
+
+  }).catch( (error) => {
+    console.log("Erro ao Logar")
+    console.log(error)
+    alert("Erro ao entrar: " + error.message)
+
+  })
+  
+} 
 

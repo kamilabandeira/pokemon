@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {        //EventListene
 
     var input = document.querySelector('#autocomplete-input')
 
-    //Tratanebto de erro para quando o campo pesquisar estiver vasio
+    //Tratamento de erro para quando o campo pesquisar estiver vasio
     if (input.length == 0) {
       return false
     } 
